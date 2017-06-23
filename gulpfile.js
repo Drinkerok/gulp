@@ -58,7 +58,7 @@ lazyRequireTask('clean', './tasks/clean.js', {});
 
 gulp.task('build', gulp.series(
   'clean',
-  gulp.parallel('html', 'img:sprite-png', 'less', 'assets'))
+  gulp.parallel('html', 'img:sprite-png', 'less', 'assets', 'js'))
 );
 
 lazyRequireTask('server', './tasks/server.js', {
@@ -75,6 +75,7 @@ gulp.task('watch', function() {
   gulp.watch(['frontend/less/**/*.less', 'tmp/**/*.less'], gulp.series('less'));
   gulp.watch('frontend/assets/**/*.*', gulp.series('assets'));
   gulp.watch('frontend/img/icons/*.{png, jpg, gif}', gulp.series('img:sprite-png'));
+  gulp.watch('frontend/js/**/*.js', gulp.series('js'));
 })
 
 

@@ -7,10 +7,10 @@ const isDevelopment = !process.env.NODE_ENV || process.env.NODE_ENV == 'developm
 
 module.exports = function(options) {
   return function() {
-    return gulp.src(options.src)
-      .pipe($.babel({
+    return gulp.src(options.src, {since: gulp.lastRun('js')})
+      .pipe($.if(!isDevelopment, $.babel({
         presets: ['es2015', 'stage-0']
-      }))
+      })))
       .pipe($.if(!isDevelopment, $.uglify({
       })))
       .pipe(gulp.dest(options.dest));
