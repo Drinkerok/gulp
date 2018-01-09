@@ -19,6 +19,13 @@ lazyRequireTask('html', './tasks/html.js', {
   src: 'frontend/html/*.html',
   dest: 'public'
 });
+
+// PUG
+lazyRequireTask('pug', './tasks/pug.js', {
+  src: 'frontend/pug/*.pug',
+  dest: 'public'
+});
+
 // Компиляция less файла из главного styles.less
 lazyRequireTask('less', './tasks/less.js', {
   src: 'frontend/less/styles.less',
@@ -37,6 +44,12 @@ lazyRequireTask('img:sprite-png', './tasks/sprite_png.js', {
   dest: 'public/img',
   template: 'templates/less.template.mustache',
   less: 'tmp/'
+});
+
+// Sprite SVG
+lazyRequireTask('img:sprite-svg', './tasks/sprite_svg.js', {
+  src: 'frontend/img/svg-sprite/*.svg',
+  dest: 'public/svg',
 });
 
 // JS
@@ -58,7 +71,8 @@ lazyRequireTask('clean', './tasks/clean.js', {});
 
 gulp.task('build', gulp.series(
   'clean',
-  gulp.parallel('html', 'img:sprite-png', 'less', 'assets', 'js'))
+  //gulp.parallel('html', 'img:sprite-svg', gulp.series('img:sprite-png', 'less'), 'assets', 'js'))
+  gulp.parallel('pug', 'img:sprite-svg', gulp.series('img:sprite-png', 'less'), 'assets', 'js'))
 );
 
 lazyRequireTask('server', './tasks/server.js', {
@@ -71,11 +85,13 @@ lazyRequireTask('server', './tasks/server.js', {
 
 // WATCH
 gulp.task('watch', function() {
-  gulp.watch('frontend/html/**/*.html', gulp.series('html'));
+  //gulp.watch('frontend/html/**/*.html', gulp.series('html'));
+  gulp.watch('frontend/pug/**/*.pug', gulp.series('pug'));
   gulp.watch(['frontend/less/**/*.less', 'tmp/**/*.less'], gulp.series('less'));
   gulp.watch('frontend/assets/**/*.*', gulp.series('assets'));
   gulp.watch('frontend/img/icons/*.{png, jpg, gif}', gulp.series('img:sprite-png'));
   gulp.watch('frontend/js/**/*.js', gulp.series('js'));
+  gulp.watch('frontend/svg-sprite/*.svg', gulp.series('img:sprite-svg'));
 })
 
 
