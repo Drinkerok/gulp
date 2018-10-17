@@ -10,6 +10,8 @@
     "babel-preset-stage-0": "^6.24.1",
     "browser-sync": "^2.18.12",
     "del": "^3.0.0",
+    "eslint": "^5.7.0",
+    "eslint-config-htmlacademy": "^0.5.2",
     "fs": "0.0.1-security",
     "gulp": "github:gulpjs/gulp#4.0",
     "gulp-autoprefixer": "^4.0.0",
@@ -33,14 +35,12 @@
     "gulp-svgmin": "^1.2.4",
     "gulp-uglify": "^3.0.0",
     "gulp.spritesmith": "^6.5.0",
-    "inputmask": "^3.3.11",
     "normalize.less": "^1.0.0",
     "picturefill": "^3.0.2",
     "stream-combiner2": "^1.1.1",
     "stylelint": "^9.2.0",
     "stylelint-config-htmlacademy": "^0.1.1",
     "through2": "^2.0.3",
-    "tiny-slider": "^2.8.2",
     "toaster": "^0.1.2",
     "vinyl-buffer": "^1.0.0",
     "vinyl-named": "^1.1.0",
@@ -56,6 +56,8 @@
     "url": "https://github.com/Drinkerok/gulp.git"
   },
   "scripts": {
-    "stylelint": "stylelint \"frontend/less/**/*.less\" --syntax less"
+    "stylelint": "stylelint \"frontend/less/**/*.less\" --syntax less",
+    "eslint": "eslint ./frontend/js/**/*.js",
+    "test": "npm run eslint && npm run stylelint"
   }
 }
