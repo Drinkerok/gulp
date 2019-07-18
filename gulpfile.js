@@ -1,10 +1,9 @@
 'use strict';
-// const isDevelopment = !process.env.NODE_ENV || process.env.NODE_ENV == 'development';
-const isDevelopment = true;
-
 
 const gulp = require('gulp');
 const $ = require('gulp-load-plugins')();
+
+const isDevelopment = !process.env.NODE_ENV || process.env.NODE_ENV == 'development';
 
 
 function lazyRequireTask(taskName, path, options = {}) {
@@ -33,13 +32,13 @@ lazyRequireTask('less', './tasks/less.js', {
 
 // Перенос всех файлов
 lazyRequireTask('assets', './tasks/assets.js', {
-  src: 'frontend/assets/**/*.*',
+  src: ['frontend/assets/**/*.*', '!frontend/assets/**/*.md'],
   dest: 'public'
 });
 
 // Перенос статичных картинок
 lazyRequireTask('img:static', './tasks/assets.js', {
-  src: 'frontend/img/**/*.*',
+  src: ['frontend/img/**/*.*', '!frontend/img/**/*.md'],
   dest: 'public/img/'
 });
 

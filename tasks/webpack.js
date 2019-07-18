@@ -20,7 +20,7 @@ function done(err, stats) {
 
 
 module.exports = function(options) {
-    let webpackOptions = {
+  let webpackOptions = {
     output: {
       publicPath: '/js/',
       filename: '[name].js',
@@ -28,14 +28,15 @@ module.exports = function(options) {
     watch: options.isDevelopment,
     devtool: false,
     module: {
-      loaders: [{
+      rules: [{
         test: /\.js$/,
+        exclude: /(node_modules)/,
         include: path.join(__dirname, "frontend"),
       }]
     },
-    plugins: [
-      new webpack.NoErrorsPlugin()
-    ]
+    // plugins: [
+    //   new webpack.NoEmitOnErrorsPlugin()
+    // ]
   };
 
   return function(callback) {
@@ -48,10 +49,10 @@ module.exports = function(options) {
       }))
       .pipe(named())
       .pipe(webpackStream(webpackOptions, null, done))
-      .pipe($.if(!options.isDevelopment, $.babel({
-        presets: ['es2015', 'stage-0']
-      })))
-      .pipe($.if(!options.isDevelopment, $.uglify({})))
+      // .pipe($.if(!options.isDevelopment, $.babel({
+      //   presets: ['es2015', 'stage-0']
+      // })))
+      // .pipe($.if(!options.isDevelopment, $.uglify({})))
       .pipe(gulp.dest(options.dest))
       .on('data', function() {
         if (firstBuildReady) {
