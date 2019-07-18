@@ -32,8 +32,14 @@ module.exports = function(options) {
         test: /\.js$/,
         exclude: /(node_modules)/,
         include: path.join(__dirname, "frontend"),
+        use: {
+          loader: 'babel-loader',
+        }
       }]
     },
+    optimization: {
+      minimize: !options.isDevelopment
+    }
     // plugins: [
     //   new webpack.NoEmitOnErrorsPlugin()
     // ]
