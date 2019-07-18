@@ -142,3 +142,4 @@ node_modules/
 bower_components/
 design/*
 package-lock.json
+public/
