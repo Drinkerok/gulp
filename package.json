@@ -54,6 +54,7 @@
     "url": "https://github.com/Drinkerok/gulp.git"
   },
   "scripts": {
+    "dev": "set NODE_ENV=development&& gulp dev",
     "build": "set NODE_ENV=production&& gulp build",
     "stylelint": "stylelint \"frontend/less/**/*.less\" --syntax less",
     "eslint": "eslint ./frontend/js/**/*.js",
